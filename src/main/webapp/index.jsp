@@ -45,13 +45,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <c:forEach items="${pessoas}" var="pessoa" > 
+                    <c:forEach items="${pessoas}" var="pessoa" > 
+                        <tr>
                             <td>${pessoa.matricula}</td>    
                             <td><a href="#">${pessoa.nome}</a></td>
                             <td>${pessoa.getProjetos().size()}</td>
-                        </c:forEach>
-                    </tr>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
