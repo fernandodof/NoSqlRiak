@@ -4,7 +4,11 @@
 <%@include file="header.jsp" %>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
+    <title>Alunos</title>
+    <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="dataTables/jquery.dataTables.css">
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="dataTables/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function() {
             $('#pessoas').dataTable({
@@ -49,12 +53,12 @@
                     <c:forEach items="${pessoas}" var="pessoa" > 
                         <tr>
                             <td>${pessoa.matricula}</td>    
-                            <td><a href="#">${pessoa.nome}</a></td>
+                            <td><a href="projetos.jsp?mat=${pessoa.matricula}">${pessoa.nome}</a></td>
                             <td>${pessoa.getProjetos().size()}</td>
                             <td>
                                 <a href="cadastro.jsp?mat=${pessoa.matricula}" class="btn pull-left"><span class="glyphicon glyphicon-edit"></span></a>
-                                <form id="excluir" method="POST" action="ExcluirPedido">
-                                    <button type="submit" name="codigo" value="${pessoa.matricula}" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+                                <form id="excluir" method="POST" action="ExcluirPessoa">
+                                    <button type="submit" name="mat" value="${pessoa.matricula}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
                                 </form>
                             </td>
                         </tr>

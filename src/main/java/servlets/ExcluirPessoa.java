@@ -6,7 +6,6 @@
 
 package servlets;
 
-import beans.Pessoa;
 import dao.RiakPersistence;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fernando
  */
-@WebServlet(name = "Editar", urlPatterns = {"/Editar"})
-public class Editar extends HttpServlet {
+@WebServlet(name = "ExcluirPessoa", urlPatterns = {"/ExcluirPessoa"})
+public class ExcluirPessoa extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +33,8 @@ public class Editar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        
-        RiakPersistence riak = new RiakPersistence();
-        
-        String matricula = request.getParameter("matricula");
-        String nome = request.getParameter("nome");
-        Pessoa p = new Pessoa();
-        p.setMatricula(matricula);
-        p.setNome(nome);
-        
-        riak.save(p);
+        RiakPersistence riakPersistence = new RiakPersistence();
+        riakPersistence.delete(request.getParameter("mat"));
         response.sendRedirect("index.jsp");
     }
 

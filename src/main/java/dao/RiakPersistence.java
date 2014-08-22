@@ -6,7 +6,9 @@
 package dao;
 
 import beans.Pessoa;
+import beans.Projeto;
 import com.basho.riak.client.IRiakClient;
+import com.basho.riak.client.IRiakObject;
 import com.basho.riak.client.RiakException;
 import com.basho.riak.client.RiakFactory;
 import com.basho.riak.client.RiakRetryFailedException;
@@ -56,7 +58,7 @@ public class RiakPersistence {
 
     public void delete(String matricula) {
         try {
-            Bucket clienteBucket = this.getRiakClient().fetchBucket("pessoas").execute();
+            Bucket clienteBucket = this.getRiakClient().fetchBucket("repositorioPessoas").execute();
             clienteBucket.delete(matricula).execute();
             
         } catch (RiakRetryFailedException ex) {
@@ -88,5 +90,22 @@ public class RiakPersistence {
             this.riakClient.shutdown();
         }
         return pessoas;
+    }
+    
+    public IRiakObject getRiakObject(String key){
+        IRiakObject riakObj = null;
+        try {
+           Bucket clienteBucket = this.getRiakClient().fetchBucket("repositorioPessoas").execute();
+           riakObj = (IRiakObject) clienteBucket.fetch(key).execute();
+        } catch (RiakRetryFailedException ex) {
+            Logger.getLogger(RiakPersistence.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            this.riakClient.shutdown();
+        }
+        return riakObj;
+    }
+    
+    public List<Projeto> getProjectsByPessoaId(String key){ 
+        return this.findByKey(key).getProjetos();
     }
 }

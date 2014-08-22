@@ -14,12 +14,9 @@
         <link href= "bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="dataTables/jquery.dataTables.css">
-        <!-- DataTables -->
-        <script type="text/javascript" charset="utf8" src="dataTables/jquery.dataTables.js"></script>
+        <link href="css/global.css" rel="stylesheet" type="text/css">
     </head>
-   
+
     <body>
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">

@@ -1,18 +1,18 @@
 package beans;
 
 public class Projeto {
-	private String disiplina;
+	private String disciplina;
 	private String descricao;
 	private String nota;
 	private String semestre;
 	private String curso;
 	
-	public String getDisiplina() {
-		return disiplina;
+	public String getDisciplina() {
+		return disciplina;
 	}
 	
-	public void setDisiplina(String disiplina) {
-		this.disiplina = disiplina;
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
 	}
 	
 	public String getDescricao() {
