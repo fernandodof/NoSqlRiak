@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pessoa {
-	private String cpf;
+	private String matricula;
 	private String nome;
 	private List<Projeto> projetos = new ArrayList<>();
 	
@@ -13,12 +13,12 @@ public class Pessoa {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getMatricula() {
+		return matricula;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 
 	public String getNome() {
