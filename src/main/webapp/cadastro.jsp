@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="header.jsp" %>
@@ -13,7 +14,7 @@
                 var addto = "#curso" + next;
                 next = next + 1;
 
-                var newIn = '<p>Projeto '+next+'</p><input autocomplete="off" class="col-xs-12" id="disciplina ' + next + '" name="disciplina' + next + '" type="text" placeholder="Disciplina" data-items="8" required/>';
+                var newIn = '<p>Projeto ' + next + '</p><input autocomplete="off" class="col-xs-12" id="disciplina ' + next + '" name="disciplina' + next + '" type="text" placeholder="Disciplina" data-items="8" required/>';
                 var newInput = $(newIn);
 
                 var newIn1 = '<input autocomplete="off" class="col-xs-12" id="descricao' + next + '" name="descricao' + next + '" type="text" placeholder="Descricao" data-items="8" required/>';
@@ -44,32 +45,75 @@
         });
     </script>
 </head>
+
+<%
+    String mat = request.getParameter("mat");
+    if (mat != null) {
+        RiakPersistence riak = new RiakPersistence();
+        Pessoa p = riak.findByKey(mat);
+        pageContext.setAttribute("pessoa", p);
+        pageContext.setAttribute("action", "Editar");
+        pageContext.setAttribute("mat", request.getParameter("mat"));
+    } else {
+        pageContext.setAttribute("form", true);
+        pageContext.setAttribute("action", "ControlarPessoa");
+    }
+%>
+
 <body>
     <div class="container">
-        <h1>Cadastrar Aluno</h1>
-        <form class="col-md-4 col-md-offset-2" method="POST" action="ControlarPessoa">
-            <div class="form-group">
-                <input name="matricula" class="col-xs-12" placeholder="Matricula">
-            </div>
-            <div class="form-group">
-                <input name="nome" class="col-xs-12" placeholder="Nome">
-            </div>
-
-            <div class="controls form-group">
-                <input type="hidden" name="count" value="1" id="count"/>
-                <div id="div">
-                    <p>Projeto 1</p>
-                    <input autocomplete="off" class="col-xs-12" id="disciplina1" name="disciplina1" type="text" placeholder="Disciplina" data-items="8" required/>
-                    <input autocomplete="off" class="col-xs-12" id="descricao1" name="descricao1" type="text" placeholder="Descricao" data-items="8" required/>
-                    <input autocomplete="off" class="col-xs-12" id="nota1" name="nota1" type="text" placeholder="Nota" data-items="8" required/>
-                    <input autocomplete="off" class="col-xs-12" id="semestre1" name="semestre1" type="text" placeholder="Semestre" data-items="8" required/>
-                    <input autocomplete="off" class="col-xs-12" id="curso1" name="curso1" type="text" placeholder="Curso" data-items="8" required/>
-                    <button id="b1" class="btn add-more btn-success" type="button">+</button>
+        <h1>Aluno</h1>
+        <div class="col-xs-12">
+            <form class="col-md-4 col-md-offset-2" action="cadastro.jsp">
+                <label for="cod">Informe a matricula do aluno:</label>
+                <div class="form-group">
+                    <input type="text" name="mat" id="mat" class="form-control" placeholder="Matricula do aluno" required value="${cod}">
                 </div>
-            </div>
+                <button type="submit" class="btn btn-success pull-right">Consultar</button>
+            </form>
+        </div>   
 
-            <button type="submit" class="btn btn-info pull-right">Cadastro</button>
-        </form>
+        <c:choose>
+            <c:when test="${pessoa != null or form}">        
+                <div class="col-xs-12">
+                    <form class="col-md-4 col-md-offset-2" method="POST" action="${action}">
+                        <div class="form-group">
+                            <input name="matricula" class="col-xs-12" placeholder="Matricula" value="${pessoa.matricula}">
+                        </div>
+                        <div class="form-group">
+                            <input name="nome" class="col-xs-12" placeholder="Nome" value="${pessoa.nome}">
+                        </div>
+
+                        <c:if test="${mat==null}">
+                            <div class="controls form-group">
+                                <input type="hidden" name="count" value="1" id="count"/>
+                                <div id="div">
+                                    <p>Projeto 1</p>
+                                    <input autocomplete="off" class="col-xs-12" id="disciplina1" name="disciplina1" type="text" placeholder="Disciplina" data-items="8" required/>
+                                    <input autocomplete="off" class="col-xs-12" id="descricao1" name="descricao1" type="text" placeholder="Descricao" data-items="8" required/>
+                                    <input autocomplete="off" class="col-xs-12" id="nota1" name="nota1" type="text" placeholder="Nota" data-items="8" required/>
+                                    <input autocomplete="off" class="col-xs-12" id="semestre1" name="semestre1" type="text" placeholder="Semestre" data-items="8" required/>
+                                    <input autocomplete="off" class="col-xs-12" id="curso1" name="curso1" type="text" placeholder="Curso" data-items="8" required/>
+                                    <button id="b1" class="btn add-more btn-success pull-left" type="button">+</button>
+                                </div>
+                            </div>
+                        </c:if> 
+
+
+
+                        <c:choose>
+                            <c:when test="${pessoa == null}">
+                                <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-warning pull-right">Editar</button>
+                            </c:otherwise>
+                        </c:choose>
+                    </form>
+                </c:when>
+                <c:otherwise><p>Nada encontrado</p></c:otherwise>                
+            </c:choose>
+        </div>    
     </div>
 </body>
 </html>

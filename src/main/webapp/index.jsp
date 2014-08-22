@@ -42,6 +42,7 @@
                         <th>Matricula</th>
                         <th>Nome</th>
                         <th>Quantidade de Projetos</th>
+                        <th>Editar/Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,12 @@
                             <td>${pessoa.matricula}</td>    
                             <td><a href="#">${pessoa.nome}</a></td>
                             <td>${pessoa.getProjetos().size()}</td>
+                            <td>
+                                <a href="cadastro.jsp?mat=${pessoa.matricula}" class="btn pull-left"><span class="glyphicon glyphicon-edit"></span></a>
+                                <form id="excluir" method="POST" action="ExcluirPedido">
+                                    <button type="submit" name="codigo" value="${pessoa.matricula}" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
