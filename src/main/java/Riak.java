@@ -21,7 +21,6 @@ public class Riak {
         projeto.setNota("9");
         projeto.setSemestre("5");
         pessoa.addProjeto(projeto);
-        pessoa.addProjeto(projeto);
         RiakPersistence riakPersistence = new RiakPersistence();
         riakPersistence.save(pessoa);
 

@@ -2,7 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="header.jsp" %>
-<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Alunos</title>
     <!-- DataTables CSS -->
@@ -29,8 +28,6 @@
             $('#tabs').tab();
         });
     </script>
-</head>
-
 
 <%
     RiakPersistence riak = new RiakPersistence();

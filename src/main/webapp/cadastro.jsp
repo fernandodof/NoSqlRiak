@@ -7,7 +7,7 @@
     <title>Cadastro</title>
     <link href="css/css_cadastro.css" rel="stylesheet" type="text/css">
     <script>
-       $(document).ready(function() {
+        $(document).ready(function() {
             next = Number($("#count").val());
             $(".add-more").click(function(e) {
                 e.preventDefault();
@@ -51,84 +51,85 @@
         pageContext.setAttribute("count", p.getProjetos().size());
         pageContext.setAttribute("projetos", p.getProjetos());
         pageContext.setAttribute("mat", request.getParameter("mat"));
+        pageContext.setAttribute("matriculaInputDisabled", "disabled");
     } else {
         pageContext.setAttribute("form", true);
     }
-%>
-    <div class="container">
-        <h1>Aluno</h1>
-        <div class="col-xs-12">
-            <form class="col-md-4 col-md-offset-2 form-consulta" action="cadastro.jsp">
-                <label for="cod">Informe a matricula do aluno:</label>
-                <div class="form-group">
-                    <input type="text" name="mat" id="mat" class="form-control" placeholder="Matricula do aluno" required value="${cod}">
-                </div>
-                <button type="submit" class="btn btn-success pull-right">Consultar</button>
-            </form>
-        </div>   
+%>  
+<div class="container">
+    <h1>Aluno</h1>
+    <div class="col-xs-12">
+        <form class="col-md-4 col-md-offset-2 form-consulta" action="cadastro.jsp">
+            <label for="cod">Informe a matricula do aluno:</label>
+            <div class="form-group">
+                <input type="text" name="mat" id="mat" class="form-control" placeholder="Matricula do aluno" required value="${cod}">
+            </div>
+            <button type="submit" class="btn btn-success pull-right">Consultar</button>
+        </form>
+    </div>   
 
-        <c:choose>
-            <c:when test="${pessoa != null or form}">
-                <h3>Dados Pessoas</h3>
-                <div class="col-xs-12">
-                    <form class="col-md-4 col-md-offset-2" method="POST" action="ControlarPessoa">
-                        <div class="form-group">
-                            <input name="matricula" class="col-xs-12" placeholder="Matricula" value="${pessoa.matricula}">
-                        </div>
-                        <div class="form-group">
-                            <input name="nome" class="col-xs-12" placeholder="Nome" value="${pessoa.nome}">
-                        </div>
-                        <div class="form-group">
-                            <input name="curso" class="col-xs-12" placeholder="Curso" value="${pessoa.curso}">
-                        </div>
-                        <div class="form-group">
-                            <h4 id="dadosProjetos" class="pull-left">Dados de projeto(s)</h4>
-                        </div>  
-                        <input type="hidden" name="count" value="${count}" id="count">
+    <c:choose>
+        <c:when test="${pessoa != null or form}">
+            <h3>Dados Pessoas</h3>
+            <div class="col-xs-12">
+                <form class="col-md-4 col-md-offset-2" method="POST" action="ControlarPessoa">
+                    <div class="form-group">
+                        <input name="matricula" class="col-xs-12" placeholder="Matricula" value="${pessoa.matricula}" ${matriculaInputDisabled}>
+                    </div>
+                    <div class="form-group">
+                        <input name="nome" class="col-xs-12" placeholder="Nome" value="${pessoa.nome}">
+                    </div>
+                    <div class="form-group">
+                        <input name="curso" class="col-xs-12" placeholder="Curso" value="${pessoa.curso}">
+                    </div>
+                    <div class="form-group">
+                        <h4 id="dadosProjetos" class="pull-left">Dados de projeto(s)</h4>
+                    </div>  
+                    <input type="hidden" name="count" value="${count}" id="count">
 
-                        <c:choose>
-                            <c:when test="${pessoa == null or pessoa.getProjetos().size()==0}">
+                    <c:choose>
+                        <c:when test="${pessoa == null or pessoa.getProjetos().size()==0}">
+
+                            <div id="div">
+                                <p class="col-xs-12">Projeto 1</p>
+                                <input class="col-xs-12" id="disciplina1" name="disciplina1" type="text" placeholder="Disciplina" data-items="8" required/>
+                                <input class="col-xs-12" id="descricao1" name="descricao1" type="text" placeholder="Descricao" data-items="8" required/>
+                                <input class="col-xs-12" id="nota1" name="nota1" type="text" placeholder="Nota" data-items="8" required/>
+                                <input class="col-xs-12" id="semestre1" name="semestre1" type="text" placeholder="Semestre" data-items="8" required/>
+                                <button id="b1" class="btn add-more btn-success pull-left" type="button">+ Projeto</button>
+                            </div>
+                            <c:choose>
+                                <c:when test="${pessoa == null}">
+                                    <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="submit" class="btn btn-warning pull-right">Editar</button>
+                                </c:otherwise>
+                            </c:choose>
+
+                        </c:when>
+                        <c:otherwise>
+                            <div class="controls form-group">
 
                                 <div id="div">
-                                    <p class="col-xs-12">Projeto 1</p>
-                                    <input class="col-xs-12" id="disciplina1" name="disciplina1" type="text" placeholder="Disciplina" data-items="8" required/>
-                                    <input class="col-xs-12" id="descricao1" name="descricao1" type="text" placeholder="Descricao" data-items="8" required/>
-                                    <input class="col-xs-12" id="nota1" name="nota1" type="text" placeholder="Nota" data-items="8" required/>
-                                    <input class="col-xs-12" id="semestre1" name="semestre1" type="text" placeholder="Semestre" data-items="8" required/>
+                                    <c:forEach items="${projetos}" var="projeto" varStatus="i">
+                                        <p class="col-xs-12">Projeto ${i.getCount()}</p>
+                                        <input class="col-xs-12" id="disciplina${i.getCount()}" name="disciplina${i.getCount()}" type="text" placeholder="Disciplina" data-items="8" required value="${projeto.disciplina}">
+                                        <input class="col-xs-12" id="descricao${i.getCount()}" name="descricao${i.getCount()}" type="text" placeholder="Descricao" data-items="8" required value="${projeto.descricao}">
+                                        <input class="col-xs-12" id="nota${i.getCount()}" name="nota${i.getCount()}" type="text" placeholder="Nota" data-items="8" required value="${projeto.nota}">
+                                        <input class="col-xs-12" id="semestre${i.getCount()}" name="semestre${i.getCount()}" type="text" placeholder="Semestre" data-items="8" required value="${projeto.semestre}">
+                                    </c:forEach>
                                     <button id="b1" class="btn add-more btn-success pull-left" type="button">+ Projeto</button>
                                 </div>
-                                <c:choose>
-                                    <c:when test="${pessoa == null}">
-                                        <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button type="submit" class="btn btn-warning pull-right">Editar</button>
-                                    </c:otherwise>
-                                </c:choose>
-
-                            </c:when>
-                            <c:otherwise>
-                                <div class="controls form-group">
-
-                                    <div id="div">
-                                        <c:forEach items="${projetos}" var="projeto" varStatus="i">
-                                            <p class="col-xs-12">Projeto ${i.getCount()}</p>
-                                            <input class="col-xs-12" id="disciplina${i.getCount()}" name="disciplina${i.getCount()}" type="text" placeholder="Disciplina" data-items="8" required value="${projeto.disciplina}">
-                                            <input class="col-xs-12" id="descricao${i.getCount()}" name="descricao${i.getCount()}" type="text" placeholder="Descricao" data-items="8" required value="${projeto.descricao}">
-                                            <input class="col-xs-12" id="nota${i.getCount()}" name="nota${i.getCount()}" type="text" placeholder="Nota" data-items="8" required value="${projeto.nota}">
-                                            <input class="col-xs-12" id="semestre${i.getCount()}" name="semestre${i.getCount()}" type="text" placeholder="Semestre" data-items="8" required value="${projeto.semestre}">
-                                        </c:forEach>
-                                        <button id="b1" class="btn add-more btn-success pull-left" type="button">+ Projeto</button>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-warning pull-right">Editar</button>
-                            </c:otherwise>
-                        </c:choose>
-                    </form>
-                </c:when>
-                <c:otherwise><p>Nada encontrado</p></c:otherwise>                
-            </c:choose>
-        </div>    
-    </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning pull-right">Editar</button>
+                        </c:otherwise>
+                    </c:choose>
+                </form>
+            </c:when>
+            <c:otherwise><p>Nada encontrado</p></c:otherwise>                
+        </c:choose>
+    </div>    
+</div>
 </body>
 </html>

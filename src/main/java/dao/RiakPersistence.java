@@ -23,7 +23,7 @@ public class RiakPersistence {
 
     private IRiakClient riakClient;
 
-    public IRiakClient getRiakClient() {
+    private IRiakClient getRiakClient() {
         try {
             riakClient = RiakFactory.pbcClient();
         } catch (RiakException ex) {
@@ -32,7 +32,7 @@ public class RiakPersistence {
         return riakClient;
     }
 
-    public void save(Pessoa pessoa) {
+    public boolean save(Pessoa pessoa) {
         try {
             Bucket bucket = this.getRiakClient().fetchBucket("repositorioPessoas").execute();
             bucket.store(pessoa.getMatricula(), pessoa).execute();
@@ -41,6 +41,8 @@ public class RiakPersistence {
         } finally {
             riakClient.shutdown();
         }
+        return true;
+        
     }
 
     public Pessoa findByKey(String matricula) {
@@ -68,7 +70,6 @@ public class RiakPersistence {
         } finally {
             this.riakClient.shutdown();
         }
-
     }
 
     public List<Pessoa> getAllPeople() {
