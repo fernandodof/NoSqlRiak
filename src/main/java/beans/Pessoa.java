@@ -49,5 +49,9 @@ public class Pessoa {
     public void addProjeto(Projeto projeto){
         this.projetos.add(projeto);
     }
+    
+    public void removeProjetoByIndex(int index){
+        this.projetos.remove(index);
+    }
 
 }

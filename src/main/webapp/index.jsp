@@ -63,6 +63,7 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <c:set var="pessoas" scope="page" value="null"></c:set>
                 </tbody>
             </table>
         </div>

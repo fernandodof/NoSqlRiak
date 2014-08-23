@@ -38,11 +38,11 @@
         RiakPersistence riakPersistence = new RiakPersistence();
         List<Projeto> projetos = riakPersistence.getProjectsByPessoaId(mat);
         pageContext.setAttribute("projetos", projetos);
-        System.out.println(projetos.size());
+        pageContext.setAttribute("mat", mat);
     }
 %>
 <body>
-     <div class="container">
+    <div class="container">
         <div class="table-responsive">
             <table id="projetos" class="display table">
                 <thead>
@@ -51,15 +51,22 @@
                         <th>Descrição</th>
                         <th>Semestre</th>
                         <th>Nota</th>
+                        <th>Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${projetos}" var="projeto"> 
+                    <c:forEach items="${projetos}" var="projeto" varStatus="i"> 
                         <tr>
                             <td>${projeto.disciplina}</td>    
                             <td>${projeto.descricao}</td>
                             <td>${projeto.semestre}</td>
                             <td>${projeto.nota}</td>
+                            <td>
+                                <form id="excluir" method="POST" action="ExcluirProjeto">
+                                    <input type="hidden" name="projeto" value="${i.getCount()}">
+                                    <button type="submit" name="mat" value="${mat}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>

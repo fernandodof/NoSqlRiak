@@ -57,7 +57,7 @@ public class ControlarPessoa extends HttpServlet {
             projeto.setSemestre(semestres.get(i - 1));
             projetos.add(projeto);
         }
-        
+
         pessoa.setProjetos(projetos);
         riakPersistence.save(pessoa);
 

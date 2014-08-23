@@ -14,7 +14,7 @@
                 var addto = "#semestre" + next;
                 next = next + 1;
 
-                var newIn = '<p>Projeto ' + next + '</p><input autocomplete="off" class="col-xs-12" id="disciplina ' + next + '" name="disciplina' + next + '" type="text" placeholder="Disciplina" data-items="8" required/>';
+                var newIn = '<p>Projeto ' + next + '</p><input class="col-xs-12" id="disciplina ' + next + '" name="disciplina' + next + '" type="text" placeholder="Disciplina" data-items="8" required/>';
                 var newInput = $(newIn);
 
                 var newIn1 = '<input class="col-xs-12" id="descricao' + next + '" name="descricao' + next + '" type="text" placeholder="Descricao" data-items="8" required/>';
@@ -84,16 +84,24 @@
                         </div>
                         <input type="hidden" name="count" value="${count}" id="count"/>
                         <c:choose>
-                            <c:when test="${pessoa == null}">
+                            <c:when test="${pessoa == null or pessoa.getProjetos().size()==0}">
                                 <div id="div">
                                     <p>Projeto 1</p>
-                                    <input autocomplete="off" class="col-xs-12" id="disciplina1" name="disciplina1" type="text" placeholder="Disciplina" data-items="8" required/>
-                                    <input autocomplete="off" class="col-xs-12" id="descricao1" name="descricao1" type="text" placeholder="Descricao" data-items="8" required/>
-                                    <input autocomplete="off" class="col-xs-12" id="nota1" name="nota1" type="text" placeholder="Nota" data-items="8" required/>
-                                    <input autocomplete="off" class="col-xs-12" id="semestre1" name="semestre1" type="text" placeholder="Semestre" data-items="8" required/>
+                                    <input class="col-xs-12" id="disciplina1" name="disciplina1" type="text" placeholder="Disciplina" data-items="8" required/>
+                                    <input class="col-xs-12" id="descricao1" name="descricao1" type="text" placeholder="Descricao" data-items="8" required/>
+                                    <input class="col-xs-12" id="nota1" name="nota1" type="text" placeholder="Nota" data-items="8" required/>
+                                    <input class="col-xs-12" id="semestre1" name="semestre1" type="text" placeholder="Semestre" data-items="8" required/>
                                     <button id="b1" class="btn add-more btn-success pull-left" type="button">+</button>
                                 </div>
-                                <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
+                                <c:choose>
+                                    <c:when test="${pessoa == null}">
+                                        <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button type="submit" class="btn btn-warning pull-right">Editar</button>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </c:when>
                             <c:otherwise>
                                 <div class="controls form-group">
