@@ -37,12 +37,15 @@
     if (mat != null) {
         RiakPersistence riakPersistence = new RiakPersistence();
         List<Projeto> projetos = riakPersistence.getProjectsByPessoaId(mat);
+        String nome = riakPersistence.findByKey(mat).getNome();
         pageContext.setAttribute("projetos", projetos);
         pageContext.setAttribute("mat", mat);
+        pageContext.setAttribute("nome", nome);
     }
 %>
 <body>
     <div class="container">
+        <h3>${nome}</h3>
         <div class="table-responsive">
             <table id="projetos" class="display table">
                 <thead>

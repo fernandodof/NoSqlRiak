@@ -106,7 +106,6 @@ public class RiakPersistence {
     }
     
     public List<Projeto> getProjectsByPessoaId(String key){
-        this.getRiakClient();
         return this.findByKey(key).getProjetos();
     }
 }

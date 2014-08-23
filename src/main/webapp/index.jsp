@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Alunos</title>
     <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="dataTables/jquery.dataTables.css">
-        <!-- DataTables -->
-        <script type="text/javascript" charset="utf8" src="dataTables/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="dataTables/jquery.dataTables.css">
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="dataTables/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function() {
             $('#pessoas').dataTable({
