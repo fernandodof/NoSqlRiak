@@ -37,7 +37,6 @@
     List<Pessoa> pessoas = riak.getAllPeople();
     pageContext.setAttribute("pessoas", pessoas);
 %>
-<body>
     <div class="container">
         <div class="table-responsive">
             <table id="pessoas" class="display table">

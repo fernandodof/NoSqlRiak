@@ -55,8 +55,6 @@
         pageContext.setAttribute("form", true);
     }
 %>
-
-<body>
     <div class="container">
         <h1>Aluno</h1>
         <div class="col-xs-12">

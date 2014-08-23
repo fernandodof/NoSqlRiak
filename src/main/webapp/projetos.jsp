@@ -43,7 +43,6 @@
         pageContext.setAttribute("nome", nome);
     }
 %>
-<body>
     <div class="container">
         <h3>${nome}</h3>
         <div class="table-responsive">
