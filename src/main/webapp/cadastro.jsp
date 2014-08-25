@@ -43,14 +43,14 @@
 
 <%
     pageContext.setAttribute("count", 1);
-    String mat = request.getParameter("mat");
-    if (mat != null) {
+    String matricula = request.getParameter("matricula");
+    if (matricula != null) {
         RiakPersistence riak = new RiakPersistence();
-        Pessoa p = riak.findByKey(mat);
+        Pessoa p = riak.findByKey(matricula);
         pageContext.setAttribute("pessoa", p);
         pageContext.setAttribute("count", p.getProjetos().size());
         pageContext.setAttribute("projetos", p.getProjetos());
-        pageContext.setAttribute("mat", request.getParameter("mat"));
+        pageContext.setAttribute("matricula", request.getParameter("matricula"));
         pageContext.setAttribute("matriculaInputDisabled", "disabled");
     } else {
         pageContext.setAttribute("form", true);
@@ -62,7 +62,7 @@
         <form class="col-md-4 col-md-offset-2 form-consulta" action="cadastro.jsp">
             <label for="cod">Informe a matricula do aluno:</label>
             <div class="form-group">
-                <input type="text" name="mat" id="mat" class="form-control" placeholder="Matricula do aluno" required value="${cod}">
+                <input type="text" name="matricula" id="matricula" class="form-control" placeholder="Matricula do aluno" required value="${matricula}">
             </div>
             <button type="submit" class="btn btn-success pull-right">Consultar</button>
         </form>
@@ -74,7 +74,7 @@
             <div class="col-xs-12">
                 <form class="col-md-4 col-md-offset-2" method="POST" action="ControlarPessoa">
                     <div class="form-group">
-                        <input name="matricula" class="col-xs-12" placeholder="Matricula" value="${pessoa.matricula}" ${matriculaInputDisabled}>
+                        <input name="matricula" class="col-xs-12" placeholder="Matricula" value="${pessoa.matricula}">
                     </div>
                     <div class="form-group">
                         <input name="nome" class="col-xs-12" placeholder="Nome" value="${pessoa.nome}">
@@ -83,7 +83,7 @@
                         <input name="curso" class="col-xs-12" placeholder="Curso" value="${pessoa.curso}">
                     </div>
                     <div class="form-group">
-                        <h4 id="dadosProjetos" class="pull-left">Dados de projeto(s)</h4>
+                        <hma4 id="dadosProjetos" class="pull-left">Dados de projeto(s)</h4>
                     </div>  
                     <input type="hidden" name="count" value="${count}" id="count">
 

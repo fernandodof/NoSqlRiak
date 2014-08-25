@@ -37,21 +37,18 @@ public class PessoaTest extends TestCase {
         pessoa.setNome("Outro nome");
         assertTrue(riakPersistence.save(pessoa));
     }
-
-    public void testListPeople() {
+    
+    public void testListPeople(){
         assertNotNull(riakPersistence.getAllPeople());
     }
-
-    public void testRiakObject() {
+    
+    public void testRiakObject(){
         assertNotNull(riakPersistence.getRiakObject("2010.2codes0445"));
     }
-
-    public void testFindPessoa() {
+    
+    public void testFindPessoa(){
         assertNotNull(riakPersistence.findByKey("2010.2codes0445"));
     }
-
-    public void testListPeople1() {
-        assertNull("Ei, tem gente no banco", riakPersistence.getAllPeople());
-    }
+    
     
 }

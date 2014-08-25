@@ -49,12 +49,12 @@
                     <c:forEach items="${pessoas}" var="pessoa" > 
                         <tr>
                             <td>${pessoa.matricula}</td>    
-                            <td><a href="projetos.jsp?mat=${pessoa.matricula}">${pessoa.nome}</a></td>
+                            <td><a href="projetos.jsp?matricula=${pessoa.matricula}">${pessoa.nome}</a></td>
                             <td>${pessoa.getProjetos().size()}</td>
                             <td>
-                                <a href="cadastro.jsp?mat=${pessoa.matricula}" class="btn pull-left"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="cadastro.jsp?matricula=${pessoa.matricula}" class="btn pull-left"><span class="glyphicon glyphicon-edit"></span></a>
                                 <form id="excluir" method="POST" action="ExcluirPessoa">
-                                    <button type="submit" name="mat" value="${pessoa.matricula}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="submit" name="matricula" value="${pessoa.matricula}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
                                 </form>
                             </td>
                         </tr>

@@ -34,7 +34,7 @@ public class ExcluirPessoa extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RiakPersistence riakPersistence = new RiakPersistence();
-        riakPersistence.delete(request.getParameter("mat"));
+        riakPersistence.delete(request.getParameter("matricula"));
         response.sendRedirect("index.jsp");
     }
 

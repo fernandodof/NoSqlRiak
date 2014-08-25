@@ -31,6 +31,7 @@ public class ControlarPessoa extends HttpServlet {
         RiakPersistence riakPersistence = new RiakPersistence();
 
         Pessoa pessoa = new Pessoa();
+        System.out.println(request.getParameter("matricula"));
         pessoa.setMatricula(request.getParameter("matricula"));
         pessoa.setNome(request.getParameter("nome"));
         pessoa.setCurso(request.getParameter("curso"));
@@ -59,6 +60,7 @@ public class ControlarPessoa extends HttpServlet {
         }
 
         pessoa.setProjetos(projetos);
+        System.out.println(pessoa.getMatricula());
         riakPersistence.save(pessoa);
 
         response.sendRedirect("index.jsp");

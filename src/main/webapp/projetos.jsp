@@ -33,13 +33,13 @@
 
 
 <%
-    String mat = request.getParameter("mat");
-    if (mat != null) {
+    String matricula = request.getParameter("matricula");
+    if (matricula != null) {
         RiakPersistence riakPersistence = new RiakPersistence();
-        List<Projeto> projetos = riakPersistence.getProjectsByPessoaId(mat);
-        String nome = riakPersistence.findByKey(mat).getNome();
+        List<Projeto> projetos = riakPersistence.getProjectsByPessoaId(matricula);
+        String nome = riakPersistence.findByKey(matricula).getNome();
         pageContext.setAttribute("projetos", projetos);
-        pageContext.setAttribute("mat", mat);
+        pageContext.setAttribute("matricula", matricula);
         pageContext.setAttribute("nome", nome);
     }
 %>
@@ -66,7 +66,7 @@
                             <td>
                                 <form id="excluir" method="POST" action="ExcluirProjeto">
                                     <input type="hidden" name="projeto" value="${i.getCount()}">
-                                    <button type="submit" name="mat" value="${mat}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="submit" name="matricula" value="${matricula}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
                                 </form>
                             </td>
                         </tr>

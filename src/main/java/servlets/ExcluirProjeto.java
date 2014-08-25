@@ -33,12 +33,12 @@ public class ExcluirProjeto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RiakPersistence riak = new RiakPersistence();
-        Pessoa pessoa = riak.findByKey(request.getParameter("mat"));
+        Pessoa pessoa = riak.findByKey(request.getParameter("matricula"));
         int projetoIndex = Integer.parseInt(request.getParameter("projeto"));
-        System.out.println(request.getParameter("mat"));
+        System.out.println(request.getParameter("matricula"));
         pessoa.removeProjetoByIndex(Integer.parseInt(request.getParameter("projeto"))-1);
         riak.save(pessoa);
-        response.sendRedirect("projetos.jsp?mat="+pessoa.getMatricula());
+        response.sendRedirect("projetos.jsp?matricula="+pessoa.getMatricula());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

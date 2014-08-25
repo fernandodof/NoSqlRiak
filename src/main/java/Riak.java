@@ -24,11 +24,10 @@ public class Riak {
         RiakPersistence riakPersistence = new RiakPersistence();
         riakPersistence.save(pessoa);
 
-        
         for (Projeto projeto1 : riakPersistence.getProjectsByPessoaId("2010.2codes0445")) {
             System.out.println(projeto1.getCurso());
         }
         System.out.println(riakPersistence.getRiakObject("2010.2codes0445").getValueAsString());
     }
-    
+
 }
