@@ -1,3 +1,13 @@
 body{
     margin-bottom: 60px;
 }
+
+table {
+   background-color: #269abc;
+}
+
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #c4e3f3;
+}

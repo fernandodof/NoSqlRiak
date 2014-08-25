@@ -36,7 +36,7 @@
 %>
     <div class="container">
         <div class="table-responsive">
-            <table id="pessoas" class="display table">
+            <table id="pessoas" class="display table table-striped">
                 <thead>
                     <tr>
                         <th>Matricula</th>

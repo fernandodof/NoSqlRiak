@@ -46,7 +46,7 @@
     <div class="container">
         <h3>${nome}</h3>
         <div class="table-responsive">
-            <table id="projetos" class="display table">
+            <table id="projetos" class="display table table-striped">
                 <thead>
                     <tr>
                         <th>Disciplina</th>
